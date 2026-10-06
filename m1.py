@@ -7,9 +7,8 @@ import os
 from dotenv import load_dotenv
 
 
-from pathlib import Path
 
-load_dotenv(dotenv_path=Path(__file__).parent / ".env")
+load_dotenv()
 
 
 app = FastAPI()
@@ -24,9 +23,9 @@ app.add_middleware(
 )
 
 
-API_KEY = os.getenv("GEMINI_API_KEY")
+API_KEY = "AQ.Ab8RN6KKsLpT7MLJc17U_uUfONo8-QvbEJGpU7bXYHZpM9OfKw"
 if not API_KEY:
-    raise RuntimeError("GEMINI_API_KEY .env file set")
+    raise RuntimeError("GEMINI_API_KEY not found")
 
 client = genai.Client(api_key=API_KEY)
 
@@ -42,7 +41,7 @@ class ChatRequest(BaseModel):
 
 @app.get("/")
 async def root():
-    return {"status": "ok", "message": "Backend chal raha hai. Docs ke liye /docs kholo."}
+    return {"status": "ok", "message": "Backend working."}
 
 
 @app.post("/chat")
